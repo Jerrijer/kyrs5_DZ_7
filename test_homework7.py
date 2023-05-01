@@ -34,6 +34,7 @@ def test_download_file_with_browser():
     browser.element('[data-open-app="link"]').click()
     time.sleep(3)
 
+
     assert os.path.exists(os.path.join(path_browser, 'pytest-main.zip'))
     assert os.path.getsize(os.path.join(path_browser, 'pytest-main.zip')) > 0
 
