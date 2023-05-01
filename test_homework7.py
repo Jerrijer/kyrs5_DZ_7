@@ -21,16 +21,19 @@ def test_download_file_with_browser():
 
     options = webdriver.ChromeOptions()
     prefs = {
-        "download.default_directory": 'path_browser',
+        "download.default_directory": path_browser,
         "download.prompt_for_download": False
     }
     options.add_experimental_option("prefs", prefs)
 
     browser.config.driver_options = options
 
+
     browser.open("https://github.com/pytest-dev/pytest")
     browser.element(".d-none .Button-label").click()
     browser.element('[data-open-app="link"]').click()
     time.sleep(3)
 
+    assert os.path.exists(os.path.join(path_browser, 'pytest-main.zip'))
+    assert os.path.getsize(os.path.join(path_browser, 'pytest-main.zip')) > 0
 
